@@ -55,7 +55,7 @@ function fn_om_linux_curl {
     fi
 
     echo ${curl_cmd} > /tmp/rqst_cmd.log
-    exec_out=$(((eval $curl_cmd | tee /tmp/rqst_stdout.log) 3>&1 1>&2 2>&3 | tee /tmp/rqst_stderr.log) &>/dev/null)
+    exec_out=$( ( (eval ${curl_cmd} | tee /tmp/rqst_stdout.log) 3>&1 1>&2 2>&3 | tee /tmp/rqst_stderr.log) &>/dev/null)
 
     if [[ $(cat /tmp/rqst_stderr.log | grep "Status:" | awk '{print$2}') != "200" ]]; then
       echo "Error Call Failed ...."
